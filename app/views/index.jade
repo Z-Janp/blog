@@ -1,0 +1,46 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type",content="text/html",charset="utf-8")
+        meta(name="viewport",content="width=device-width,initial-scale=1")
+        title #{title}
+        link(href="/css/app.css",rel="stylesheet")
+    body
+        aside#sidebar
+            h1.cat-header 分类
+            form.searchBox()
+                input#searchTxt(type="search",name="search")
+                input(type="text",style="display:none")
+                input#searchBtn(type="button")
+            section.cat-body
+                each cat in categories
+                    ul.cat-list
+                        if cat.articles && cat.articles.length > 0
+                            li.cat-list-item(style="height:17px") #{cat.name}
+                                ul.art-list
+                                    each item in cat.articles
+                                        li.art-list-item
+                                            a(href="/#{item._id}") #{item.title}
+        article#rightSide 
+            if article
+                h1.art-title #{article.title}
+                .art-meta
+                    p.art-author 作者:
+                        span #{article.author}
+                    p.art-updateAt 更新时间:
+                        span #{moment(article.meta.updateAt).format('YYYY/MM/DD')}
+                section.art-content !{article.content}
+                section#comment.art-comment
+                    .ds-thread(data-title='#{article.title}',data-thread-key='#{article._id}')
+        #back_to_top
+            a(href="#") back to top
+        #edit
+            if article
+                a(href="/editor/#{article._id}") edit
+            else
+                a(href="/editor") edit
+        #go_to_comment
+            a(href="#comment") comment
+        .progress-indicator-2(style="width:0%")
+    script(src='/js/index.js')
+    script(src='http://static.duoshuo.com/embed.js')

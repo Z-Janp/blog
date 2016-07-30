@@ -1,0 +1,31 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type",content="text/html",charset="utf-8")
+        meta(name="viewport",content="width=device-width,initial-scale=1")
+        title #{title}
+        style.
+            body{
+                font-family: "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+                display:flex;
+                justify-content:center;
+            }
+            .status {
+                font: bold 90px Cambria, "Times New Roman", Times, sans-serif;
+                letter-spacing: 2px;
+                margin-bottom: 10px;
+                color: #333;
+                text-align: center;
+            }
+            .back{
+                color: #666;
+            }
+    body
+        .container
+            header
+                h1.status 404
+            article
+                p 抱歉，您欲访问的页面未找到。页面可能已移至他处，或已从网站删除。
+                p 请在地址栏核对网址，查看是否有误。
+                p
+                    a(href='/' class='back') 或者，可返回首页。

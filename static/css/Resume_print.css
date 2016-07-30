@@ -1,0 +1,379 @@
+@page {
+    size: A4 portrait;
+    margin: 2.1cm 1.9cm;
+}
+
+body {
+    margin: 0;
+    background: #fff;
+    color: #000;
+    font-family: 'Lucida Grande', Arial, Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    -webkit-print-color-adjust: exact;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: inherit;
+}
+
+ul, ol {
+    list-style-type: none;
+}
+
+p, ul, ol {
+    text-align: justify;
+    text-justify: inter-ideograph;
+    line-height: 1.7;
+}
+
+img {
+    border: none;
+    vertical-align: top;
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.clear:after {
+    display: block;
+    overflow: hidden;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+    content: '.';
+}
+
+.list > li {
+    list-style: disc;
+    margin-left: 1.3em;
+}
+
+.only-for-print {
+    display: block;
+}
+
+.not-for-print {
+    display: none;
+}
+
+.header {
+    border-bottom: 1px solid #d6d6d6;
+    line-height: 1;
+    padding-bottom: 15px;
+}
+
+#contact {
+    font-size: 14px;
+}
+
+.section .boundary {
+    padding: 10px 0;
+}
+
+.section_header {
+    text-shadow: 1px 1px 0 #fff;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.section_header_title {
+    font-family: 'Microsoft JhengHei', 'Microsoft YaHei', 'STHeiti SC', 'SimHei';
+    text-align: center;
+}
+
+.section_header_title {
+    font-size: 2em;
+}
+
+/*skill*/
+.skill_list_item {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+#skill_body {
+    float: left; /* 自适应内容宽度 */
+    position: relative;
+    left: 50%;
+}
+
+ul.skill_list {
+    position: relative;
+    left: -50%;
+}
+
+ul.skill_list li {
+    float: left;
+    margin: 0 20px;
+}
+
+.skill {
+    text-align: center;
+}
+
+.skill_part {
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    font-size: 5.4em;
+    cursor: default;
+}
+
+.skill_part > .percent {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    font-size: 25px;
+    text-align: center;
+    z-index: 2;
+}
+
+.skill_part > .percent .dec {
+    font-size: 15px;
+}
+
+.skill_part > #slice {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    clip: rect(0px, 1em, 1em, 0.5em);
+}
+
+.skill_part > #slice.gt50 {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.skill_part > #slice > .pie {
+    position: absolute;
+    border: 0.1em solid #444;
+    width: 0.8em;
+    height: 0.8em;
+    clip: rect(0em, 0.5em, 1em, 0em);
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+}
+
+li.skill_html .skill_part > #slice > .pie {
+    border-color: #2ECC70;
+}
+
+li.skill_js .skill_part > #slice > .pie {
+    border-color: red;
+}
+
+li.skill_cSharp .skill_part > #slice > .pie {
+    border-color: #3598DB;
+}
+
+.skill_part > #slice > .pie.fill {
+    -moz-transform: rotate(180deg) !important;
+    -webkit-transform: rotate(180deg) !important;
+    -o-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important;
+}
+
+.skill_part.fill > .percent {
+    display: none;
+}
+
+.skill_part:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0.1em;
+    left: 0.1em;
+    width: 0.8em;
+    height: 0.8em;
+    background: white;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+    z-index: 1;
+}
+
+.skill_part:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: .5;
+    z-index: 0;
+}
+
+li.skill_html .skill_part:before {
+    background: #2ECC61;
+}
+
+li.skill_js .skill_part:before {
+    background: #FF6861;
+}
+
+li.skill_cSharp .skill_part:before {
+    background: #1e90ff;
+}
+
+.skill_list_item {
+    position: relative;
+    cursor: default
+}
+
+.skill_part_detail {
+    display: none;
+}
+
+.learn_list {
+    border-left: 4px solid #ccc;
+    padding: 1px 0;
+    margin-left: 8px;
+}
+
+.learn_list_point {
+    position: relative;
+    padding-left: 15px;
+    margin: 15px 0;
+    height: 26px;
+    line-height: 26px;
+}
+
+.learn_list_point_ico {
+    width: 18px;
+    height: 18px;
+    border: 3px solid #fff;
+    border-radius: 12px;
+    background: #3498db;
+    position: absolute;
+    left: -14px;
+    top: 0;
+}
+
+.learn_list_unit {
+    margin: 15px 0 15px 20px;
+}
+
+.learn_list_unit_header {
+    position: relative;
+    padding-left: 115px;
+    line-height: 1;
+}
+
+.learn_list_unit_logo {
+    width: 100px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.learn_list_unit_logo img {
+    width: 100%;
+}
+
+.learn_list_unit_name{
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.learn_list_unit_job {
+    color: #888;
+    display: inline-block;
+}
+
+.learn_list_unit_job:before {
+    content: '\2014\2014';
+    padding-right: 4px;
+}
+
+.learn_list_unit_body {
+    margin-top: 3px;
+    padding-left: 115px;
+}
+
+.project {
+    margin-bottom: 25px;
+    padding: 0 5px 15px 5px;
+    border-bottom: 2px dashed #ccc;
+}
+
+.project:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.project_intro_header {
+    margin-bottom: 6px;
+}
+.project_title {
+    float: left;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.project_time {
+    margin-left: 4px;
+    font-size: 0.75em;
+    color: #888;
+}
+
+.project_time:before {
+    content: '(';
+}
+
+.project_time:after {
+    content: ')';
+}
+
+.project_link { margin-top: 5px; text-align: right;color: #eb7350;}
+.project_link a:after {
+    content: ': 'attr(href);
+}
+.project_img {
+    display: none;
+}
+
+#footer {
+    border-top: 1px solid #e8e8e8;
+    color: #888;
+    font-size: 0.875em;
+}
+
+#footer .boundary {
+    padding-top: 10px;
+}
+
+.footer_QRCode {
+    float: left;
+}
+
+#footer_QRCode img {
+    width: 107px;
+    height: 107px;
+    float: left;
+}
+
+#footer_QRCode .QRCode_text {
+    margin: 7px 0 0 10px;
+    float: left;
+}

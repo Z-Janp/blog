@@ -1,0 +1,27 @@
+.navbar.navbar-default.navbar-fixed-top
+    .container
+        if user
+            p.navbar-text.navbar-right
+                span #{user.name}
+                span &nbsp;|&nbsp;
+                a.navbar-link(href='/user/logout') 退出
+        else
+            p.navbar-text.navbar-right
+                a#loginLink.navbar-link(href='#',data-toggle='modal',data-target='#loginModal') 登录
+#loginModal.modal.fade
+    .modal-dialog(style='width:300px;')
+        .modal-content
+            form#formlogin()
+                .modal-body
+                    .form-group
+                        label(for="loginName") 用户名
+                        .col-md-8.pull-right
+                            strong.error_txt(style='color:#a94442;')
+                        input#loginName.form-control(name="user[name]",type="text",autocomplete="off")
+                    .form-group
+                        label(for="loginPassword") 密码
+                        input#loginPassword.form-control(type='password',name="user[password]")
+                .modal-footer
+                    button#dismissBtn.btn.btn-default(type="button",data-dismiss="modal") 关闭
+                    button#login.btn.btn-success(type="button") 登录
+script(src='/js/login.js')

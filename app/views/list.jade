@@ -1,0 +1,34 @@
+extends ./layout
+block bootstrapValidator
+    script(src="/js/bootstrapValidator.min.js")
+    link(href="/css/bootstrapValidator.min.css",rel="stylesheet")
+block content
+    .container
+        .row
+            .page-header.clearfix
+                h1 #{title}
+    .container
+        .row
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th 分类
+                        th 标题
+                        th 作者
+                        th 更新时间
+                        th 查看
+                        th 更新
+                        th 删除
+                tbody
+                    each item in articles
+                        tr(class="item-id-#{item._id}")
+                            td #{item.category.name}
+                            td #{item.title}
+                            td #{item.author}
+                            td #{moment(item.meta.updateAt).format('YYYY/MM/DD')}
+                            td: a(target="_blank",href="../../article/#{item._id}") 查看
+                            td: a(target="_blank",href="../../editor/#{item._id}") 修改
+                            td
+                                button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+    script(src='/js/list.js')
+    script(src='/js/login.js')

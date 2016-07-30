@@ -1,0 +1,35 @@
+extends ./layout
+block bootstrapValidator
+    link(href="/css/mditor.min.css",rel="stylesheet")
+    style.
+        .publish{margin-top:60px;}
+    link(href="/css/bootstrapValidator.min.css",rel="stylesheet")
+    script(src="/js/bootstrapValidator.min.js")
+block content
+    .container.publish
+        form#article.form-horizontal
+            if article && article._id
+                input(type="hidden",name="article[_id]",value=article._id)
+            .form-group
+                .col-md-6
+                    input#myTitle.form-control(type="text",name="article[title]",value=article?article.title:'',autocomplete="off",placeholder="标题:那是夕阳下的奔跑")
+            .form-group
+                .col-md-3
+                    select.form-control(name="article[category]")
+                        each cat in categories
+                            if article && article._id
+                                option(value="#{cat._id}",selected=cat._id.toString()===article.category.toString()?"selected":"") #{cat.name}
+                            else    
+                                option(value="#{cat._id}") #{cat.name}
+                .col-md-3
+                    input#inputCategory.form-control(type="text", name="article[categoryName]", placeholder="如需新增分类在此输入")
+            .form-group
+                .col-sm-12
+                    textarea#deitor.editor(spellcheck="false",name="article[content]")=article?article.content:''
+            .pull-right
+                button#pubBtn.btn.btn-success(type="button") 提交
+    script(src="/js/mditor.min.js")
+    script(src='/js/editValidator.js')
+        
+        
+        
