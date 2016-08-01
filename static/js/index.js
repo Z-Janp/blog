@@ -158,44 +158,36 @@ function toggleDuoshuoComments(container, data) {
     DUOSHUO.EmbedThread(el);
     container.appendChild(el);
 }
-(function () {
-    document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));
-    var bdcs = document.createElement('script');
-    bdcs.type = 'text/javascript';
-    bdcs.async = true;
-    bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=9406139824929975242' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date() / 3600000);
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(bdcs, s);
-})();
 //search
-// janp.addHandler(janp.$queryAll('#searchBtn')[0], 'click', function (event) {
-//     var q = janp.$queryAll('#searchTxt')[0].value;
-//     console.log(q);
-//     if (q === '') {
-//         return;
-//     }
-//     var xhr = janp.createXHR();
-//     xhr.onreadystatechange = function () {
-//         if (xhr.readyState == 4) {
-//             if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-//                 var articles = JSON.parse(xhr.responseText).articles, i, len, html;
-//                 //<div id="result"></div>
-//                 for (i = 0, len = articles.length; i < len; i++) {
-//                     html += '<article class="result"><h3 class="r-title"><a href="/article/' + articles[i]._id + '" target="_blank">' + articles[i].title + '</a></h3><div class="r-main"><p class="r-content">' + articles[i].content + '</p><span>' + articles[i].meta.createAt + '</span></div></article>';
-//                 }
-//                 janp.$queryAll('#rightSide')[0].innerHTML = html;
-//                 console.log(articles);
-//             } else {
-//                 console.log('Request was unsuccessful:' + xhr.status);
-//             }
-//         }
-//     };
-//     xhr.open('post', '/result', true);
-//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     xhr.send('search=' + q);
-// })
-// janp.addHandler(janp.$queryAll('#searchTxt')[0], 'keydown', function (event) {
-//     var ev = event ? event : window.event;
-//     if (ev.keyCode === 13) {
-//         console.log(this.value);
-//     }
-// })
+janp.addHandler(janp.$queryAll('#searchBtn')[0], 'click', function (event) {
+    var q = janp.$queryAll('#searchTxt')[0].value;
+    console.log(q);
+    if (q === '') {
+        return;
+    }
+    var xhr = janp.createXHR();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                var articles = JSON.parse(xhr.responseText).articles, i, len, html;
+                //<div id="result"></div>
+                for (i = 0, len = articles.length; i < len; i++) {
+                    html += '<article class="result"><h3 class="r-title"><a href="/article/' + articles[i]._id + '" target="_blank">' + articles[i].title + '</a></h3><div class="r-main"><p class="r-content">' + articles[i].content + '</p><span>' + articles[i].meta.createAt + '</span></div></article>';
+                }
+                janp.$queryAll('#rightSide')[0].innerHTML = html;
+                console.log(articles);
+            } else {
+                console.log('Request was unsuccessful:' + xhr.status);
+            }
+        }
+    };
+    xhr.open('post', '/result', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send('search=' + q);
+})
+janp.addHandler(janp.$queryAll('#searchTxt')[0], 'keydown', function (event) {
+    var ev = event ? event : window.event;
+    if (ev.keyCode === 13) {
+        console.log(this.value);
+    }
+})
