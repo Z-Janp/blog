@@ -70,14 +70,20 @@ a:hover {
     display: none;
 }
 
-.header {
+#header {
     border-bottom: 1px solid #d6d6d6;
     line-height: 1;
     padding-bottom: 15px;
+    position: relative;
 }
-
 #contact {
-    font-size: 14px;
+    font-size: 20px;
+    position: absolute;
+    top:0px;
+    left: 190px;
+}
+.contact_item a:after {
+    content: ': 'attr(href);
 }
 
 .section .boundary {
@@ -169,15 +175,16 @@ ul.skill_list li {
     border-radius: 0.5em;
 }
 
-li.skill_html .skill_part > #slice > .pie {
+li.skill_0 .skill_part > #slice > .pie {
     border-color: #2ECC70;
 }
-
-li.skill_js .skill_part > #slice > .pie {
+li.skill_1 .skill_part > #slice > .pie {
     border-color: red;
 }
-
-li.skill_cSharp .skill_part > #slice > .pie {
+li.skill_2 .skill_part > #slice > .pie {
+    border-color:#00BFA5;
+}
+li.skill_3 .skill_part > #slice > .pie {
     border-color: #3598DB;
 }
 
@@ -222,15 +229,16 @@ li.skill_cSharp .skill_part > #slice > .pie {
     z-index: 0;
 }
 
-li.skill_html .skill_part:before {
+li.skill_0 .skill_part:before {
     background: #2ECC61;
 }
-
-li.skill_js .skill_part:before {
+li.skill_1 .skill_part:before {
     background: #FF6861;
 }
-
-li.skill_cSharp .skill_part:before {
+li.skill_2 .skill_part:before{
+    background: #40e0d0;
+}
+li.skill_3 .skill_part:before {
     background: #1e90ff;
 }
 

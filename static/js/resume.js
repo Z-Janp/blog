@@ -87,5 +87,4 @@ if (window.atob) {
 if (/phone/i.test(window.location.search)) {
     Jose.$Id("phone").style.display = '';
 }
-Jose.$Id("qq").appendChild(document.createTextNode('a9b6c4d7e0f5g9h2i4j'.replace(/\D/g, '')));
-Jose.$Id("email").appendChild(document.createTextNode(['com', '163', 'zhang_yagao'].reverse().join('.').replace('.', '@')));
+Jose.$Id("email").appendChild(document.createTextNode(['com', '163', 'zhang_Janp'].reverse().join('.').replace('.', '@')));

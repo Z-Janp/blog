@@ -44,7 +44,7 @@ exports.loginRequire = (req, res, next) => {
 exports.adminRequire = (req, res, next) => {
     const user = req.session.user;
     if (user.role <= 10) {
-        return res.redirect('/signin');
+        return res.redirect('/login');
     }
     next();
 };
