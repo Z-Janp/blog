@@ -5,6 +5,14 @@ html
         meta(name="viewport",content="width=device-width,initial-scale=1")
         title #{title}
         link(href="/css/app.css",rel="stylesheet")
+        script.
+            var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?2334e921077280e40e2b0931857c56a0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+            })();
     body
         aside#sidebar
             h1.cat-header 分类
