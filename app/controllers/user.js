@@ -59,7 +59,7 @@ exports.signup = (req, res) => {
         if (user) {
             res.redirect('/login');//用户名已存在
         } else {
-            const user = new User(_user);
+            user = new User(_user);
             user.save((err, user) => {
                 if (err) {
                     console.log(err);
