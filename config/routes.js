@@ -26,6 +26,7 @@ module.exports = (app) => {
     app.post('/admin/publish', User.loginRequire, Article.save);
 
     app.get('/resume',Index.showResume);
+    app.get('/music',Index.showMusic);
 
     app.get('/:id', Article.xhrdetail);
 

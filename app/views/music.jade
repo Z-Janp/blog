@@ -1,0 +1,49 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport",content="width=device-width, user-scalable=no")
+        link(href="/libs/bootstrap/dist/css/bootstrap.min.css",rel="stylesheet")
+        script(src="/libs/jquery/dist/jquery.min.js")
+        link(rel="stylesheet" href="/css/music.css")
+        script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+        script.
+            var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?2334e921077280e40e2b0931857c56a0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+            })();
+    body
+        .container
+            .col-md-4.cont
+                #player
+                    .pic.cont
+                        img(src="http://p4.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg?param=130y130", alt="歌曲图片")
+                        span.cir
+                    .tag
+                        p.song-name="绅士"
+                        p.art-name="薛之谦"
+                    .lrc
+                    .process
+                        .probg
+                            .rdy
+                            .cur
+                                span.pro-handle
+                        .time 04:51
+                    .control
+                        .mode
+                            a.icon.icon-loop(href="javascript:;",hidefocus="true",data-action="mode",title="循环")
+                        .btns
+                            a.prv.icon(href="javascript:;",hidefocus="true",data-action="prev",title="上一首")
+                            a.ply.icon(href="javascript:;",hidefocus="true",data-action="prev",title="播放/暂停")
+                            a.next.icon(href="javascript:;",hidefocus="true",data-action="prev",title="下一首")
+                        //- .volume
+                        //-     .mute.icon
+                        //-         .vbg
+                        //-             .curr
+                        //-             span.vol-handle
+                        .list
+                            a.icon.icon-list(href="javascript:;",hidefocus="true",data-action="panel",title="播放列表")
+    script(src="/js/music.js")
