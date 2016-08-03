@@ -158,7 +158,6 @@ function toggleDuoshuoComments(container, data) {
     DUOSHUO.EmbedThread(el);
     container.appendChild(el);
 }
-//search
 janp.addHandler(janp.$queryAll('#searchBtn')[0], 'click', function (event) {
     var q = janp.$queryAll('#searchTxt')[0].value;
     console.log(q);
@@ -172,7 +171,7 @@ janp.addHandler(janp.$queryAll('#searchBtn')[0], 'click', function (event) {
                 var articles = JSON.parse(xhr.responseText).articles, i, len, html;
                 //<div id="result"></div>
                 for (i = 0, len = articles.length; i < len; i++) {
-                    html += '<article class="result"><h3 class="r-title"><a href="/article/' + articles[i]._id + '" target="_blank">' + articles[i].title + '</a></h3><div class="r-main"><p class="r-content">' + articles[i].content + '</p><span>' + articles[i].meta.createAt + '</span></div></article>';
+                    html += '<section class="result"><h3 class="r-title"><a href="/article/' + articles[i]._id + '" target="_blank">' + articles[i].title + '</a></h3><div class="r-main"><p class="r-content">' + articles[i].content + '</p><span>' + articles[i].meta.createAt + '</span></div></section>';
                 }
                 janp.$queryAll('#rightSide')[0].innerHTML = html;
                 console.log(articles);

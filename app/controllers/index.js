@@ -35,3 +35,6 @@ exports.pageNotfound = (req, res) => {
 exports.showResume = (req, res) => {
     res.render('resume');
 }
+exports.showMusic = (req, res) => {
+    res.render('music');
+}
