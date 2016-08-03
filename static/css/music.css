@@ -41,21 +41,6 @@ body{
     z-index: -5;
     border-radius:50%;
 }
-@media (min-height: 568px) {
-    .lrc{
-    height: 180px;
-    }
-}
-@media (min-height: 667px) {
-    .lrc{
-    height: 250px;
-    }
-}
-@media (min-height: 763px) {
-    .lrc{
-    height: 280px;
-    }
-}
 .tag{
     text-align: center;
     margin-top: 10px;
@@ -76,9 +61,7 @@ body{
 .mode .icon-loop{
     background-position: -3px -342px;
 }
-.mode .icon-loop:hover{
-    background-position: -33px -342px;
-}
+
 .mode .icon-loop:active{
     background-position: -33px -342px;
 }
@@ -93,7 +76,7 @@ body{
 .control .btns .prv {
     background-position: 0 -130px;
 }
-.control .btns .prv:hover {
+.control .btns .prv:active {
     background-position: -30px -130px;
 }
 .control .btns .ply {
@@ -102,19 +85,19 @@ body{
     margin-top: 0;
     background-position: 0 -204px;
 }
-.control .btns .ply:hover {
+.control .btns .ply:active {
     background-position: -40px -204px;
 }
 .control .btns .next {
     background-position: -80px -130px;
 }
-.control .btns .next:hover {
+.control .btns .next:active {
     background-position: -110px -130px;
 }
 .list .icon-list{
     background-position: -42px -69px;
 }
-.list .icon-list:hover{
+.list .icon-list:active{
     background-position: -42px -99px;
 }
 .list .icon{
@@ -128,3 +111,34 @@ body{
     background-position: -2px -248px;
 }
 
+
+@media (min-height: 568px) {
+    .lrc{
+    height: 180px;
+    }
+}
+@media (min-height: 667px) {
+    .lrc{
+    height: 250px;
+    }
+}
+@media (min-height: 763px) {
+    .lrc{
+    height: 280px;
+    }
+    .mode .icon-loop:hover{
+        background-position: -33px -342px;
+    }
+    .control .btns .prv:hover {
+        background-position: -30px -130px;
+    }
+    .control .btns .next:hover {
+        background-position: -110px -130px;
+    }       
+    .control .btns .ply:hover {
+        background-position: -40px -204px;
+    }
+    .list .icon-list:hover{
+        background-position: -42px -99px;
+    }
+}
