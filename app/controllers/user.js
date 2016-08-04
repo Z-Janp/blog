@@ -22,6 +22,7 @@ exports.login = (req, res) => {
 //logout
 exports.logout = (req, res) => {
     delete req.session.user;
+    res.redirect('/');
 };
 exports.showLogin = (req, res) => {
     res.render('login', {
