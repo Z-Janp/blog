@@ -16,34 +16,45 @@ html
             s.parentNode.insertBefore(hm, s);
             })();
     body
-        .container
-            .col-md-4.cont
+        .container.play-container
+            .col-sm-6.cont
                 #player
                     .pic.cont
-                        img(src="http://p4.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg?param=130y130", alt="歌曲图片")
+                        img.picimg(alt="歌曲图片")
                         span.cir
                     .tag
-                        p.song-name="绅士"
-                        p.art-name="薛之谦"
+                        p.song-name
+                        p.art-name
                     .lrc
                     .process
+                        span.curTime
                         .probg
                             .rdy
                             .cur
-                                span.pro-handle
-                        .time 04:51
+                                a.pro-handle
+                        span.tolTime
                     .control
                         .mode
                             a.icon.icon-loop(href="javascript:;",hidefocus="true",data-action="mode",title="循环")
                         .btns
-                            a.prv.icon(href="javascript:;",hidefocus="true",data-action="prev",title="上一首")
-                            a.ply.icon(href="javascript:;",hidefocus="true",data-action="prev",title="播放/暂停")
-                            a.next.icon(href="javascript:;",hidefocus="true",data-action="prev",title="下一首")
-                        //- .volume
-                        //-     .mute.icon
-                        //-         .vbg
-                        //-             .curr
-                        //-             span.vol-handle
+                            a.prev.icon(href="javascript:;",hidefocus="true",data-action="prev",title="上一首")
+                            a.ply.pause.icon(href="javascript:;",hidefocus="true",data-action="ply",title="播放/暂停")
+                            a.next.icon(href="javascript:;",hidefocus="true",data-action="nest",title="下一首")
                         .list
-                            a.icon.icon-list(href="javascript:;",hidefocus="true",data-action="panel",title="播放列表")
+                            a.icon.icon-list(href="javascript:;",hidefocus="true",data-action="hide",title="播放列表")
+                    audio#audio(autoplay="autoplay")
+                .songlist
+                    if song
+                        p.songtol 播放列表(#{song.length})
+                        #wrapper
+                            ul.songcont
+                                - var i = 0;
+                                each item in song
+                                    a.react(data-index=i++,href="javascript:;")
+                                        li
+                                            div
+                                            span #{item.songName}&nbsp;
+                                            span.list-art-name #{item.artName}
+                        p.clolist 关闭
+    script(src="/js/iscroll.js")
     script(src="/js/music.js")
