@@ -2,7 +2,7 @@
 (function () {
     var myScroll;
     function loaded() {
-        myScroll = new IScroll('#wrapper', { mouseWheel: true });
+        myScroll = new IScroll('#wrapper', { mouseWheel: true, preventDefault: false });
     }
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     window.addEventListener('load', loaded, false);
@@ -135,7 +135,6 @@
             switch (mode) {
                 case 'loop':
                     _audio.onended = function () {
-                        console.log(player.curIedex);
                         player.playNext();
                     };
                     break;
@@ -216,7 +215,7 @@
     _$audio.on('progress', function () {
         var timeRanges = _audio.buffered;
         // 获取以缓存的时间
-        if (timeRanges.length) {
+        if (timeRanges.length > 0) {
             var timeBuffered = timeRanges.end(timeRanges.length - 1);
             // 获取缓存进度，值为0%到100%
             var duration = _audio.duration;
@@ -230,16 +229,19 @@
         $('.tolTime').html(timeDispose(_audio_duration));
     });
     $('.probg').on('click', function (ev) {
-        _audio.pause();
         var seektime = ev.offsetX / $(this).width() * _audio.duration;
         if ('fastSeek' in audio) {
             _audio.fastSeek(seektime);
-            _audio.play();
+            if (!_audio.paused) {
+                _audio.play();
+            }
         } else {
             _audio.currentTime = seektime;
             setTimeout(function () {
-                _audio.play();
             }, 150);
+            if (!_audio.paused) {
+                _audio.play();
+            }
         }
     });
 })();

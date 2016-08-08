@@ -67,20 +67,24 @@ play-.container{
     font-size: 1.5rem;
     margin: 0px;
 }
+.art-name{
+    font-size: 1rem;
+}
 .process{
     position: relative;
+    font-size: 1rem;
 }
 .process .probg,.process .rdy,.process .cur{
     background: url(/img/statbar.png) no-repeat;
 }
-.process .curTime{
+.process span{
     position: absolute;
     top: 10px;
+}
+.process .curTime{
     left: 0.8rem;
 }
 .process .tolTime{
-    position: absolute;
-    top: 10px;
     right: 0.8rem;
 }
 .process .probg{
@@ -117,6 +121,7 @@ play-.container{
     margin: 30px 0 10px;
     display: flex;
     justify-content: center;
+    -webkit-justify-content: center;
 }
 .mode .icon-loop{
     background-position: -3px -342px;
@@ -273,7 +278,7 @@ play-.container{
     background-color: #CFCFCF;
     color: #2C2219;
     font-size: 1.5rem;
-    display: none;
+    visibility:hidden;
 }
 .songlist p{
     text-align: center;
@@ -281,6 +286,12 @@ play-.container{
 }
 .songlist .songcont{
     margin-left: 10px;
+}
+.songtol{
+    border-bottom: 1px solid #BCBCBC;
+}
+.clolist{
+    border-top: 1px solid #BCBCBC;
 }
 .songlist .react,.songlist p{
     height: 30px;
@@ -290,7 +301,7 @@ play-.container{
     display: table;
 }
 .songlist .list-art-name{
-    font-size: 0.5rem;
+    font-size: 1rem;
     color: #9b9b9b;
     display: table-cell;
     vertical-align: middle;
@@ -352,7 +363,7 @@ play-.container{
     }
 }
 .fadeInUpBig {
-    display: block;
+    visibility: visible;
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
     -webkit-animation-name: fadeInUpBig;
@@ -388,7 +399,7 @@ play-.container{
     }
 }
 .fadeOutDownBig {
-    display: block;
+    visibility: visible;
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
     -webkit-animation-name: fadeOutDownBig;
