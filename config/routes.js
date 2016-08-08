@@ -27,6 +27,7 @@ module.exports = (app) => {
 
     app.get('/resume',Index.showResume);
     app.get('/music',Index.showMusic);
+    app.get('/api/request/music',Index.sentMusic);
 
     app.get('/:id', Article.xhrdetail);
 
