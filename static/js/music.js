@@ -1,12 +1,12 @@
 
 (function () {
+    //局部滚动
     var myScroll;
     function loaded() {
         myScroll = new IScroll('#wrapper', { mouseWheel: true, preventDefault: false });
     }
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     window.addEventListener('load', loaded, false);
-    document.body.addEventListener('touchstart', function () { });
     //时间处理
     function timeDispose(number) {
         var minute = parseInt(number / 60, 10);
@@ -109,6 +109,12 @@
             $('.songlist').find('.react').eq(index).addClass('playcur');
             _audio.play();
         },
+        autoPlay: function () {
+            if (_audio.paused) {
+                _audio.load(); // iOS 9   需要额外的 load 一下
+                _audio.play(); // iOS 7/8 仅需要 play 一下
+            }
+        },
         playPrev: function () {
             player.playcur.eq(player.curIedex).removeClass('playcur');
             if (player.curIedex === 0) {
@@ -206,6 +212,7 @@
         }
     });
     player.init();
+    $(document).one('touchstart', player.autoPlay);
     _$audio.on('timeupdate', function () {
         if (_audio_duration > 0) {
             $('.cur').width(_audio.currentTime * 100 / _audio_duration + '%');
