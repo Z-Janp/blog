@@ -1,3 +1,6 @@
+html,body{
+    height: 100%;
+}
 body{
     background: #333;
     font-size:62.5%;
@@ -203,12 +206,12 @@ play-.container{
         width: 100%;
     }
     #wrapper{
-        height: 150px;
+        height: 100px;
     }
 }
 @media (min-width: 320px) {
     .lrc{
-    height: 180px;
+    height: 150px;
     }
     .songlist{
         width: 100%;
@@ -282,7 +285,6 @@ play-.container{
 }
 .songlist p{
     text-align: center;
-    height: 60%
 }
 .songlist .songcont{
     margin-left: 10px;
@@ -297,14 +299,9 @@ play-.container{
     height: 30px;
     line-height: 30px;
 }
-.songlist .react li{
-    display: table;
-}
 .songlist .list-art-name{
     font-size: 1rem;
     color: #9b9b9b;
-    display: table-cell;
-    vertical-align: middle;
 }
 .playcur .list-art-name{
     color: inherit;
@@ -313,9 +310,6 @@ play-.container{
     content: '-\20';
 }
 .songlist .react{
-    display: block;
-    text-decoration: none;
-    color: inherit;
     border-bottom:1px solid #BCBCBC;
 }
 .songlist .react:active{
@@ -406,4 +400,35 @@ play-.container{
     animation-name: fadeOutDownBig;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+}
+
+.pic .playing {
+    animation: rotatelogo 10s linear infinite forwards;
+    /* Firefox: */
+    -moz-animation: rotatelogo 10s linear infinite forwards;
+    /* Safari 和 Chrome: */
+    -webkit-animation: rotatelogo 10s linear infinite forwards;
+    /* Opera: */
+    -o-animation: rotatelogo 10s linear infinite forwards;
+}
+@keyframes rotatelogo {
+    0% {
+        transform: rotate(0)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+@-webkit-keyframes rotatelogo {
+    0% {
+        -webkit-transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+.pic .pause{
+    animation-play-state:paused;
+    -webkit-animation-play-state:paused; /* Safari 和 Chrome */
 }

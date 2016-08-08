@@ -44,17 +44,9 @@ html
                             a.icon.icon-list(href="javascript:;",hidefocus="true",data-action="hide",title="播放列表")
                     audio#audio(autoplay="autoplay")
                 .songlist
-                    if song
-                        p.songtol 播放列表(#{song.length})
-                        #wrapper
-                            ul.songcont
-                                - var i = 0;
-                                each item in song
-                                    a.react(data-index=i++,href="javascript:;")
-                                        li
-                                            div
-                                            span #{item.songName}&nbsp;
-                                            span.list-art-name #{item.artName}
-                        p.clolist 关闭
+                    p.songtol 播放列表
+                    #wrapper
+                        ul.songcont
+                    p.clolist 关闭
     script(src="/js/iscroll.js")
     script(src="/js/music.js")

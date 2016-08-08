@@ -1,5 +1,7 @@
 const Article = require('../models/article.js');
 const Category = require('../models/category.js');
+const api = require('../../node_modules/musicapi');
+
 exports.index = (req, res) => {
     Category
         .find({}, { 'name': 1, 'articles': 1, _id: 0 })
@@ -36,6 +38,11 @@ exports.showResume = (req, res) => {
     res.render('resume');
 }
 exports.showMusic = (req, res) => {
+    res.render('music');
+    //api.search('年度之歌', callback);
+    //api.id(2497699, 'album', callback);
+    //api.id(16705, 'artist', callback);
+    //api.id(325145, 'mv', callback);
     var Songs = [{
         songUrl: 'http://m2.music.126.net/qVgoSa4HGtKYTZw-NuRBhQ==/2900511674279376.mp3',
         imgUrl: 'http://p3.music.126.net/k_fcxMCLHEJk4X70mxxQSA==/2912606302143493.jpg',
@@ -91,7 +98,51 @@ exports.showMusic = (req, res) => {
             artName: '张学友',
             lyric: ''
         }];
-    res.render('music', {
-        song: Songs
-    });
+
+}
+exports.sentMusic = (req, res) => {
+    'use strict'
+    const songID = [31341931, 114037, 113289, 63914, 190563, 27906003, 25714352, 65487, 187672, 188647, 63650, 95377];
+    const songs = [];
+    const callback = function (err, songres, body) {
+        if (err) {
+            console.error(err);
+        };
+        if (songres.statusCode === 200) {
+            api.id(114037, 'lyc', function (err, lycres, lycbody) {
+                if (err) {
+                    console.log(err);
+                }
+                const resbody = JSON.parse(body);
+                const lycjson = JSON.parse(lycbody);
+                const lyr = lycjson.uncollected ? '' : lycjson.lrc.lyric;
+                let artname = '',
+                    i,
+                    len = resbody.songs[0].artists;
+
+                if (len > 1) {
+                    for (i = 0; i < len; i++) {
+                        artname += resbody.songs[0].artists[i].name + '/'
+                    }
+                } else {
+                    artname = resbody.songs[0].artists[0].name;
+                }
+                const song = {
+                    songUrl: resbody.songs[0].mp3Url,
+                    imgUrl: resbody.songs[0].album.blurPicUrl,
+                    songName: resbody.songs[0].name,
+                    artName: artname,
+                    lyric: lyr
+                };
+                songs.push(song);
+                if (songID.length === songs.length) {
+                    res.json(songs);
+                }
+                //console.log(songs);
+            }, { lv: -1 });
+        };
+    };
+    for (let i = 0, len = songID.length; i < len; i++) {
+        api.id(songID[i], 'song', callback);
+    }
 }

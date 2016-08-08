@@ -6,7 +6,7 @@
         myScroll = new IScroll('#wrapper', { mouseWheel: true, preventDefault: false });
     }
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-    window.addEventListener('load', loaded, false);
+    //window.addEventListener('load', loaded, false);
     //时间处理
     function timeDispose(number) {
         var minute = parseInt(number / 60, 10);
@@ -15,6 +15,23 @@
         second = second >= 10 ? second : "0" + second;
         return minute + ":" + second;
     }
+    $.ajax({
+        url: '/api/request/music',
+        type: 'get',
+        success: function (data) {
+            var inserthtml = '';
+            for (var i = 0, len = data.length; i < len; i++) {
+                inserthtml += '<li class="react" data-index="' + i + '"><div></div><span>' + data[i].songName + '&nbsp;</span><span class="list-art-name">' + data[i].artName + '</span></li>';
+            }
+            $('#wrapper>.songcont').html(inserthtml);
+            player.init(data);
+            //待dom加载完毕初始化滚动
+            loaded();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
     /*
     27906003 谁是大英雄
     114037   夏日倾情
@@ -24,95 +41,47 @@
     193535 友情岁月
     190563 每天爱你多一些
      */
-    var Songs = [{
-        songUrl: 'http://m2.music.126.net/qVgoSa4HGtKYTZw-NuRBhQ==/2900511674279376.mp3',
-        imgUrl: 'http://p3.music.126.net/k_fcxMCLHEJk4X70mxxQSA==/2912606302143493.jpg',
-        songName: '赌神',
-        artName: '卢冠廷',
-        lyric: ''
-    }, {
-            songUrl: 'http://m2.music.126.net/VylJ56H9uv5MyM2eAOeHaw==/3275445139217868.mp3',
-            imgUrl: 'http://p3.music.126.net/i2YqeMpR2DPuj15M-B1skA==/5816416510959096.jpg',
-            songName: '你还要我怎样',
-            artName: '薛之谦',
-            lyric: ''
-        }, {
-            songUrl: 'http://m2.music.126.net/xzD20CfWhcZe8ei0u4kgNQ==/5654788301713969.mp3',
-            imgUrl: 'http://p4.music.126.net/Tti3Cp2KTd0wmwDTSXMq8g==/5661385371479175.jpg',
-            songName: 'Oh Father',
-            artName: 'Bodhi Jones',
-            lyric: ''
-        }, {
-            songUrl: 'http://m2.music.126.net/-j_ZP0B2f9PyBniGwXyN5g==/6636652186643852.mp3',
-            imgUrl: 'http://p3.music.126.net/nP48IWjEbgXmvmbMRD7HPg==/2540971374328644.jpg',
-            songName: '17岁',
-            artName: '刘德华',
-            lyric: ''
-        }, {
-            songUrl: 'http://m2.music.126.net/MvmE1RzkW7pTjN4lgsEe-w==/5913173534292763.mp3',
-            imgUrl: 'http://p3.music.126.net/cEzneoBlhD5eeOyoc664fA==/3383197279803332.jpg',
-            songName: '谁是大英雄',
-            artName: '张学友',
-            lyric: ''
-        }, {
-            songUrl: 'http://m2.music.126.net/x7coPl5xrTypO90Zs88RmQ==/1285329092878032.mp3',
-            imgUrl: 'http://p3.music.126.net/uYCTBhoRY8BF_-0jZ_5YAg==/1718536674223651.jpg',
-            songName: '夏日倾情',
-            artName: '黎明',
-            lyric: ''
-        }, {
-            songUrl: 'http://m2.music.126.net/KReV3o3WB8L4VJR6mvl-5g==/2153943278813262.mp3',
-            imgUrl: 'http://p3.music.126.net/s2rrkEZ6S7UVAJI-D1M4lA==/2258396883454110.jpg',
-            songName: '空白格',
-            artName: '杨宗纬',
-            lyric: ''
-        }, {
-            songUrl: 'http://m2.music.126.net/DJkwzBtOvA9wIfouQLtWRg==/1190771092888605.mp3',
-            imgUrl: 'http://p4.music.126.net/-yYvrC0SLv1dD_bDnEUE7g==/96757023261526.jpg',
-            songName: '友情岁月',
-            artName: '郑伊健',
-            lyric: ''
-        }, {
-            songUrl: 'http://m2.music.126.net/qcvkgzbRrqBCLsgRnI2xHw==/1143492092895642.mp3',
-            imgUrl: 'http://p3.music.126.net/G-C-qam5WcATpN_7zkhxWA==/34084860473101.jpg',
-            songName: '每天爱你多一些',
-            artName: '张学友',
-            lyric: ''
-        }];
     var _audio = document.getElementById("audio");
     var _$audio = $('#audio');
     var _audio_duration = null;
     var player = {
-        data: Songs,
+        data: null,
         curIedex: 0,
-        playcur: $('.songlist').find('.react'),
-        init: function () {
-            player.play(0);
+        playcur: null,
+        init: function (songs) {
+            player.data = songs;
+            player.playcur = $('#wrapper>.songcont>.react');
+            player.playAppoint(0);
             player.playMode('loop');
+        },
+        play: function () {
+            $('.pic>.picimg').addClass('playing').removeClass('pause');
+            _audio.play();
         },
         playAudio: function () {
             if (_audio.paused) {
                 $(".ply").addClass("pause");
-                _audio.play();
+                player.play();
             } else {
                 $(".ply").removeClass("pause");
+                $('.pic>.picimg').addClass('pause');
                 _audio.pause();
 
             }
         },
-        play: function (index) {
+        playAppoint: function (index) {
             var detail = player.data[index];
             _audio.src = detail.songUrl;
             $('.pic').find('.picimg').prop('src', detail.imgUrl);
             $('.tag').find('.song-name').html(detail.songName);
             $('.tag').find('.art-name').html(detail.artName);
-            $('.songlist').find('.react').eq(index).addClass('playcur');
-            _audio.play();
+            $('#wrapper>.songcont>.react').eq(index).addClass('playcur');
+            player.play();
         },
         autoPlay: function () {
             if (_audio.paused) {
                 _audio.load(); // iOS 9   需要额外的 load 一下
-                _audio.play(); // iOS 7/8 仅需要 play 一下
+                player.play(); // iOS 7/8 仅需要 play 一下
             }
         },
         playPrev: function () {
@@ -122,8 +91,12 @@
             } else {
                 player.curIedex--;
             }
-            _audio.pause();
-            player.play(player.curIedex);
+            if (_audio.paused) {
+                $(".ply").addClass("pause");
+            } else {
+                _audio.pause();
+            }
+            player.playAppoint(player.curIedex);
         },
         playNext: function () {
             player.playcur.eq(player.curIedex).removeClass('playcur');
@@ -134,30 +107,34 @@
             } else {
                 player.curIedex++;
             }
-            _audio.pause();
-            player.play(player.curIedex);
+            if (_audio.paused) {
+                $(".ply").addClass("pause");
+            } else {
+                _audio.pause();
+            }
+            player.playAppoint(player.curIedex);
         },
         playMode: function (mode) {
             switch (mode) {
                 case 'loop':
-                    _audio.onended = function () {
+                    _$audio.on('ended', function () {
                         player.playNext();
-                    };
+                    });
                     break;
                 case 'single':
-                    _audio.onended = function () {
+                    _$audio.on('ended', function () {
                         _audio.load();
                         _audio.play();
-                    };
+                    });
                     break;
                 case 'shuffle':
-                    _audio.onended = function () {
+                    _$audio.on('ended', function () {
                         var index = parseInt((player.data.length - 1) * Math.random());
                         player.playcur.eq(player.curIedex).removeClass('playcur');
                         player.curIedex = index;
                         _audio.pause();
-                        player.play(index);
-                    };
+                        player.playAppoint(index);
+                    });
                     break;
                 default: break;
             }
@@ -183,13 +160,16 @@
         });
         player.playMode(mode);
     });
-    $('#wrapper>.songcont').on('click', 'a', function () {
+    $('#wrapper>.songcont').on('click', 'li', function () {
         var index = parseInt(this.dataset.index, 10);
         var curIedex = player.curIedex;
         if (index !== curIedex) {
             player.playcur.eq(curIedex).removeClass('playcur');
+            if (_audio.paused) {
+                $(".ply").addClass("pause");
+            }
             player.curIedex = index;
-            player.play(this.dataset.index);
+            player.playAppoint(this.dataset.index);
         }
     });
     $('.list .icon-list').on('click', function (ev) {
@@ -211,7 +191,6 @@
             $('.songlist>.clolist').click();
         }
     });
-    player.init();
     $(document).one('touchstart', player.autoPlay);
     _$audio.on('timeupdate', function () {
         if (_audio_duration > 0) {
