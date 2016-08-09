@@ -72,6 +72,17 @@ play-.container{
 .art-name{
     font-size: 1rem;
 }
+.lrc{
+    overflow: hidden;
+}
+.lyric_wrap{
+    position: relative;
+    top: 50%;
+    text-align: center;
+}
+.lyric_wrap .on{
+    color: #fff;
+}
 .process{
     position: relative;
     font-size: 1rem;
@@ -403,13 +414,13 @@ play-.container{
 }
 
 .pic .playing {
-    animation: rotatelogo 10s linear infinite forwards;
+    animation: rotatelogo 10s linear infinite;
     /* Firefox: */
-    -moz-animation: rotatelogo 10s linear infinite forwards;
+    -moz-animation: rotatelogo 10s linear infinite;
     /* Safari 和 Chrome: */
-    -webkit-animation: rotatelogo 10s linear infinite forwards;
+    -webkit-animation: rotatelogo 10s linear infinite;
     /* Opera: */
-    -o-animation: rotatelogo 10s linear infinite forwards;
+    -o-animation: rotatelogo 10s linear infinite;
 }
 @keyframes rotatelogo {
     0% {

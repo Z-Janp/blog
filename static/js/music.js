@@ -6,7 +6,6 @@
         myScroll = new IScroll('#wrapper', { mouseWheel: true, preventDefault: false });
     }
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-    //window.addEventListener('load', loaded, false);
     //时间处理
     function timeDispose(number) {
         var minute = parseInt(number / 60, 10);
@@ -48,6 +47,10 @@
         data: null,
         curIedex: 0,
         playcur: null,
+        regex: /\[(\d{2})\:(\d{2})\.(\d{2,4})\](.+)/,
+        curTime: '',
+        _$lyric_wrap: $('.lyric_wrap'),
+        lyricLineHeight: 0,
         init: function (songs) {
             player.data = songs;
             player.playcur = $('#wrapper>.songcont>.react');
@@ -66,7 +69,6 @@
                 $(".ply").removeClass("pause");
                 $('.pic>.picimg').addClass('pause');
                 _audio.pause();
-
             }
         },
         playAppoint: function (index) {
@@ -77,6 +79,23 @@
             $('.tag').find('.art-name').html(detail.artName);
             $('#wrapper>.songcont>.react').eq(index).addClass('playcur');
             player.play();
+            if (detail.lyric && !(detail.lyric instanceof Object)) {
+                detail.lyric = player.parseLyric(detail.lyric);
+            }
+            if (detail.lyric) {
+                var lry = '';
+                for (var item in detail.lyric) {
+                    lry += '<p>' + detail.lyric[item].lyric + '</p>';
+                }
+                player._$lyric_wrap.html(lry);
+                player.lyricLineHeight = player._$lyric_wrap.find('p').height();
+                (function () {
+                    var lrcScroll;
+                    lrcScroll = new IScroll('.lrc', { mouseWheel: true, preventDefault: false });
+                })();
+            } else {
+                player._$lyric_wrap.html('<p>未找到歌词~</p>');
+            }
         },
         autoPlay: function () {
             if (_audio.paused) {
@@ -139,6 +158,28 @@
                 default: break;
             }
         },
+        parseLyric: function (lrc) {
+            var lyrics = lrc.split("\n");
+            var lrcObj = {};
+            for (var i = 0; i < lyrics.length; i++) {
+                var matches = player.regex.exec(lyrics[i]);
+                if (matches) {
+                    var m = parseFloat(matches[1]) >= 10 ? parseFloat(matches[1]) : '0' + parseFloat(matches[1]);
+                    var s = parseFloat(matches[2]) >= 10 ? parseFloat(matches[2]) : '0' + parseFloat(matches[2]);
+                    var f = parseFloat(matches[3]);
+                    var time = m + ':' + s;//m * 60 + s;//minute + ":" + second
+                    var lyric = matches[4];
+                    lrcObj[time] = {
+                        lyric: lyric,
+                        index: i
+                    };
+                } else {
+                    //未匹配
+                    //console.log(line);
+                }
+            }
+            return lrcObj;
+        }
     };
     $('.ply').on('click', player.playAudio);
     $('.prev').on('click', player.playPrev);
@@ -160,6 +201,7 @@
         });
         player.playMode(mode);
     });
+    //播放列表操作
     $('#wrapper>.songcont').on('click', 'li', function () {
         var index = parseInt(this.dataset.index, 10);
         var curIedex = player.curIedex;
@@ -191,16 +233,39 @@
             $('.songlist>.clolist').click();
         }
     });
+    //手机端自动播放
     $(document).one('touchstart', player.autoPlay);
+    //监听播放器的状态
     _$audio.on('timeupdate', function () {
         if (_audio_duration > 0) {
             $('.cur').width(_audio.currentTime * 100 / _audio_duration + '%');
-            $('.curTime').html(timeDispose(_audio.currentTime));
+            var curTime = timeDispose(_audio.currentTime);
+            //限定1s刷新一次
+            if (player.curTime !== curTime) {
+                var lrc = player.data[player.curIedex].lyric;
+                if (lrc[curTime]) {
+                    //player._$lyric_wrap.addClass('playing').removeClass('pause');
+                    player._$lyric_wrap.find('.on').removeClass('on');
+                    var p = player._$lyric_wrap.find("p:nth-child(" + (lrc[curTime].index + 1) + ")");
+                    p.addClass("on");
+                    player._$lyric_wrap.css({
+                        "transform": "translate(0,-" + lrc[curTime].index * player.lyricLineHeight + "px)",
+                        "-ms-transform": "translate(0,-" + lrc[curTime].index * player.lyricLineHeight + "px)",
+                        "-moz-transform": "translate(0,-" + lrc[curTime].index * player.lyricLineHeight + "px)",
+                        "-webkit-transform": "translate(0,-" + lrc[curTime].index * player.lyricLineHeight + "px)",
+                        "-o-transform": "translate(0,-" + lrc[curTime].index * player.lyricLineHeight + "px)"
+                    });
+                } else {
+                    //player._$lyric_wrap.addClass('pause');
+                }
+                player.curTime = curTime;
+                $('.curTime').html(curTime);
+            }
         }
     });
     _$audio.on('progress', function () {
         var timeRanges = _audio.buffered;
-        // 获取以缓存的时间
+        // 获取已缓存的时间
         if (timeRanges.length > 0) {
             var timeBuffered = timeRanges.end(timeRanges.length - 1);
             // 获取缓存进度，值为0%到100%
@@ -214,6 +279,7 @@
         _audio_duration = _audio.duration;
         $('.tolTime').html(timeDispose(_audio_duration));
     });
+    //调整播放进度
     $('.probg').on('click', function (ev) {
         var seektime = ev.offsetX / $(this).width() * _audio.duration;
         if ('fastSeek' in audio) {
