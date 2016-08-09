@@ -74,6 +74,7 @@ play-.container{
 }
 .lrc{
     overflow: hidden;
+    font-size: 1.5rem;
 }
 .lyric_wrap{
     position: relative;
