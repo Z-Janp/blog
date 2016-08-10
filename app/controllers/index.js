@@ -5,7 +5,8 @@ const api = require('../../node_modules/musicapi');
 exports.index = (req, res) => {
     Category
         .find({}, { 'name': 1, 'articles': 1, _id: 0 })
-        .populate({ path: 'articles', select: '_id title', options: { sort: { 'meta.createAt': -1 } } })
+        .sort({'meta.updateAt': -1 })
+        .populate({ path: 'articles', select: '_id title meta', options: { sort: { 'meta.createAt': -1 } } })
         .exec((err, categories) => {
             if (err) {
                 console.log(err);
