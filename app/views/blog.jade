@@ -1,0 +1,48 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+        title #{title}
+        link(href="/css/app.css",rel="stylesheet")
+        link(rel="stylesheet",href="/css/font.css")
+        script.
+            var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?2334e921077280e40e2b0931857c56a0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+            })();
+    body
+        aside#sidebar
+            img.myPic(src="/img/me.jpg" alt="My Picture")
+            address
+                ul.contact
+                    li.contact_item
+                            a(href="http://fifaonlinevr.cn" target="_blank")
+                                i.fa.fa-home.fa-fw
+                    li.contact_item
+                        a(href="mailto:zhang_Janp@163.com")
+                            i.fa.fa-envelope.fa-fw
+                    li.contact_item
+                        a(href="https://github.com/Z-Janp" target="_blank")
+                            i.fa.fa-github.fa-fw
+            span.about-me 
+                a(href="/about") About me
+            form.searchBox
+                input.searchTxt(type="search",name="search",autocomplete="off")
+                input.searchBtn(type="button")
+        article#rightSide
+            each cat in categories
+                ul.cat-list
+                    if cat.articles && cat.articles.length > 0
+                        li.archive-item #{cat.name}
+                            ul.archive-list
+                                each item in cat.articles
+                                    li
+                                        span.archive-time #{moment(item.meta.createAt).format('YYYY/MM/DD')}
+                                        h1.archive-title 
+                                            a(href="/article/#{item._id}") #{item.title}
+        .progress-indicator-2(style="width:0%")
+    script(src='/js/article.js')

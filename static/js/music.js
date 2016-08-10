@@ -244,7 +244,6 @@
             if (player.curTime !== curTime) {
                 var lrc = player.data[player.curIedex].lyric;
                 if (lrc[curTime]) {
-                    //player._$lyric_wrap.addClass('playing').removeClass('pause');
                     player._$lyric_wrap.find('.on').removeClass('on');
                     var p = player._$lyric_wrap.find("p:nth-child(" + (lrc[curTime].index + 1) + ")");
                     p.addClass("on");
@@ -255,8 +254,6 @@
                         "-webkit-transform": "translate(0,-" + lrc[curTime].index * player.lyricLineHeight + "px)",
                         "-o-transform": "translate(0,-" + lrc[curTime].index * player.lyricLineHeight + "px)"
                     });
-                } else {
-                    //player._$lyric_wrap.addClass('pause');
                 }
                 player.curTime = curTime;
                 $('.curTime').html(curTime);

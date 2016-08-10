@@ -10,22 +10,13 @@ exports.index = (req, res) => {
             if (err) {
                 console.log(err);
             }
-            res.render('index', {
+            res.render('blog', {
                 title: 'blog',
                 categories: categories
             })
         })
 };
-exports.search = (req, res) => {
-    const q = req.body.search;
-    const regexp = new RegExp(q + '.*', 'i');
-    console.log(q);
-    Article
-        .find({ "$or": [{ 'title': regexp }, { 'content': regexp }] })
-        .exec((err, articles) => {
-            res.json({ success: true, articles: articles });
-        })
-}
+
 exports.pageNotfound = (req, res) => {
     console.log('404 handler, URL' + req.originalUrl);
     res.status(404);
@@ -34,6 +25,9 @@ exports.pageNotfound = (req, res) => {
         title: '您欲访问的页面未找到'
     });
 };
+exports.showAbout = (req, res) => {
+    res.render('about');
+}
 exports.showResume = (req, res) => {
     res.render('resume');
 }

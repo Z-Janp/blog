@@ -6,37 +6,65 @@ const Category = require('../models/category.js');
 exports.detail = (req, res, next) => {
     const id = req.params.id;
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
-        Category
-            .find({}, { 'name': 1, 'articles': 1, _id: 0 })
-            .populate({ path: 'articles', select: '_id title', options: { sort: { 'meta.createAt': -1 } } })
-            .exec((err, categories) => {
-                if (err) {
-                    console.log(err);
-                }
-                Article.findById(id, (err, article) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    if (article) {
-                        article.content = marked(article.content);
-                        res.render('index', {
-                            title: article.title,
-                            categories: categories,
-                            article: article
-                        })
-                    } else {
-                        // res.render('index', {
-                        //     title: '文章不存在',
-                        //     categories: categories
-                        // })
-                        next();
-                    }
+        Article.findById(id, (err, article) => {
+            if (err) {
+                console.log(err);
+            }//处理null
+            if (article) {
+                article.content = marked(article.content);
+                res.render('article', {
+                    title: article.title,
+                    article: article
                 })
-            })
+            } else {
+                next();
+            }
+        })
     } else {
         next();
     }
+    // if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    //     Category
+    //         .find({}, { 'name': 1, 'articles': 1, _id: 0 })
+    //         .populate({ path: 'articles', select: '_id title', options: { sort: { 'meta.createAt': -1 } } })
+    //         .exec((err, categories) => {
+    //             if (err) {
+    //                 console.log(err);
+    //             }
+    //             Article.findById(id, (err, article) => {
+    //                 if (err) {
+    //                     console.log(err);
+    //                 }
+    //                 if (article) {
+    //                     article.content = marked(article.content);
+    //                     res.render('article', {
+    //                         title: article.title,
+    //                         categories: categories,
+    //                         article: article
+    //                     })
+    //                 } else {
+    //                     // res.render('index', {
+    //                     //     title: '文章不存在',
+    //                     //     categories: categories
+    //                     // })
+    //                     next();
+    //                 }
+    //             })
+    //         })
+    // } else {
+    //     next();
+    // }
 };
+exports.search = (req, res) => {
+    const q = req.body.search;
+    const regexp = new RegExp(q + '.*', 'i');
+    console.log(q);
+    Article
+        .find({ "$or": [{ 'title': regexp }, { 'content': regexp }] })
+        .exec((err, articles) => {
+            res.json({ success: true, articles: articles });
+        })
+}
 exports.xhrdetail = (req, res, next) => {
     const id = req.params.id;
     if (id.match(/^[0-9a-fA-F]{24}$/)) {

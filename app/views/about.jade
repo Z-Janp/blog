@@ -1,0 +1,32 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+        title About Janp
+        link(href="/css/app.css",rel="stylesheet")
+        link(rel="stylesheet",href="/css/font.css")
+    body
+        aside#sidebar
+            img.myPic(src="/img/me.jpg" alt="My Picture")
+            address
+                ul.contact
+                    li.contact_item
+                            a(href="http://fifaonlinevr.cn" target="_blank")
+                                i.fa.fa-home.fa-fw
+                    li.contact_item
+                        a(href="mailto:zhang_Janp@163.com")
+                            i.fa.fa-envelope.fa-fw
+                    li.contact_item
+                        a(href="https://github.com/Z-Janp" target="_blank")
+                            i.fa.fa-github.fa-fw
+            span.about-me 
+                a(href="/about") About me
+            form.searchBox
+                input.searchTxt(type="search",name="search",autocomplete="off")
+                input.searchBtn(type="button")
+        article#rightSide
+            h1 About
+            section
+                p.info
+    script(src='/js/type.js')

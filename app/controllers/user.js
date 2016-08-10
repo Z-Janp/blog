@@ -50,7 +50,7 @@ exports.adminRequire = (req, res, next) => {
 };
 //注册
 exports.signup = (req, res) => {
-    const _user = req.body.user;//user对象 中间键bodyParser将数据格式化为对象
+    const _user = req.body.user;//user对象 中间件bodyParser将数据格式化为对象
     //req.param('user')  express的实现
     User.findOne({ name: _user.name }, (err, user) => {
         if (err) {
