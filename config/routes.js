@@ -28,7 +28,7 @@ module.exports = (app) => {
     app.get('/about', Index.showAbout);
     app.get('/resume', Index.showResume);
 
-    app.get('/baidu_verify_QQZp53BYMW.html', function () {
+    app.get('/baidu_verify_QQZp53BYMW.html', function (req, res) {
         res.sendfile("baidu_verify_QQZp53BYMW.html");
     });
 
