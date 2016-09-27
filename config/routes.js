@@ -25,10 +25,15 @@ module.exports = (app) => {
     app.get('/admin/article/list', User.loginRequire, Article.list);
     app.post('/admin/publish', User.loginRequire, Article.save);
 
-    app.get('/about',Index.showAbout);
-    app.get('/resume',Index.showResume);
-    app.get('/music',Index.showMusic);
-    app.get('/api/request/music',Index.sentMusic);
+    app.get('/about', Index.showAbout);
+    app.get('/resume', Index.showResume);
+
+    app.get('/baidu_verify_QQZp53BYMW.html', function () {
+        res.sendfile("baidu_verify_QQZp53BYMW.html");
+    });
+
+    app.get('/music', Index.showMusic);
+    app.get('/api/request/music', Index.sentMusic);
 
     //app.get('/:id', Article.xhrdetail);
 
