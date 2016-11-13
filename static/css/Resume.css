@@ -70,13 +70,10 @@ a, a:visited { text-decoration: none; color: #000; }
 }
 /*skill*/
 #skill_body{
-    float: left; /* 自适应内容宽度 */
-    position: relative;
-    left: 50%;
+    text-align: center;
 }
 ul.skill_list{
-    position: relative;
-    left: -50%;
+    display: inline-block;
 }
 ul.skill_list li {
     float: left;
