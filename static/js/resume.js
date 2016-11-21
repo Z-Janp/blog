@@ -39,7 +39,7 @@ var Jose = (function () {
      }*/
     (function () {
         var skill = [{
-            title: 'HTML(5)&CSS(3)',
+            title: 'HTML&CSS',
             level: 8,
             detail: ['HTML、CSS代码编写规范，能合理设计结构兼容主流浏览器；', '编写语义化的 HTML；', '熟悉HTML5&CSS3；', '能熟练使用Chrome开发者工具、FireBug、Fiddler等工具辅助开发。']
         }, {
