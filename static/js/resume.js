@@ -39,21 +39,21 @@ var Jose = (function () {
      }*/
     (function () {
         var skill = [{
-            title: 'HTML&CSS',
-            level: 7,
+            title: 'HTML(5)&CSS(3)',
+            level: 8,
             detail: ['HTML、CSS代码编写规范，能合理设计结构兼容主流浏览器；', '编写语义化的 HTML；', '熟悉HTML5&CSS3；', '能熟练使用Chrome开发者工具、FireBug、Fiddler等工具辅助开发。']
         }, {
                 title: 'JavaScript',
-                level: 7,
+                level: 8,
                 detail: ['熟悉JavaScript，能使用原生JS进行简易开发；', '能运用模块化、面向对象的方式编程；', '熟悉jQ框架']
             }, {
                 title: 'Node.js',
                 level: 3,
                 detail: ['能构建简易Web应用；', '了解express,MongoDB,Jade,Markdown']
             }, {
-                title: 'C#&Java',
+                title: 'HTTP',
                 level: 2,
-                detail: ['了解C#,Java，能配合后台工作。']
+                detail: ['状态码、请求方法、缓存']
             }];
         var html = '', list = '';
         for (var i = 0, len = skill.length; i < len; i++) {

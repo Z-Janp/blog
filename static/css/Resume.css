@@ -246,13 +246,14 @@ li.skill_3 .skill_part:before {
     display: block;
     width: 100px;
 }
-.learn_list_unit_logo img{
+/*.learn_list_unit_logo img{
     width: 100px;
     float: left;
-}
+}*/
 .learn_list_unit_name{
     font-size: 1.2em;
     font-weight: bold;
+    color: #626e7c;
 }
 .learn_list_point_ico{
     width: 15px;
@@ -266,22 +267,22 @@ li.skill_3 .skill_part:before {
 }
 .learn_list_unit_name { font-size: 1.2em; font-weight: bold; }
 .learn_list_unit_job { color: #888; }
-.learn_list_unit_body { margin-top: 4px; }
+/*.learn_list_unit_body { margin-top: 4px; }*/
 @media (max-width: 639px) {
     .learn_list_unit_name { margin-top: 10px; color: blue; }
     .learn_list_unit_job { margin-top: 2px; }
 }
 @media (min-width: 640px) {
     .learn_list_unit { margin-top: 30px; margin-bottom: 30px; }
-    .learn_list_unit_header { position: relative; padding-left: 115px; }
-    .learn_list_unit_logo { position: absolute; left: 0; top: 0; }
+    /*.learn_list_unit_header { position: relative; padding-left: 115px; }*/
+    /*.learn_list_unit_logo { position: absolute; left: 0; top: 0; }*/
     .learn_list_unit_name,
     .learn_list_unit_job { display: inline-block; }
     .learn_list_unit_job:before {
         content: '\2014\2014';
         padding-right: 4px;
     }
-    .learn_list_unit_body { padding-left: 115px; }
+    /*.learn_list_unit_body { padding-left: 115px; }*/
 }
 /*project*/
 .project { border-bottom: 2px dashed #ccc; }

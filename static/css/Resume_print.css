@@ -280,23 +280,23 @@ li.skill_3 .skill_part:before {
     margin: 15px 0 15px 20px;
 }
 
-.learn_list_unit_header {
+/*.learn_list_unit_header {
     position: relative;
     padding-left: 115px;
     line-height: 1;
-}
+}*/
 
-.learn_list_unit_logo {
+/*.learn_list_unit_logo {
     width: 100px;
     display: block;
     position: absolute;
     left: 0;
     top: 0;
-}
+}*/
 
-.learn_list_unit_logo img {
+/*.learn_list_unit_logo img {
     width: 100%;
-}
+}*/
 
 .learn_list_unit_name{
     font-size: 1.2em;
@@ -314,10 +314,10 @@ li.skill_3 .skill_part:before {
     padding-right: 4px;
 }
 
-.learn_list_unit_body {
+/*.learn_list_unit_body {
     margin-top: 3px;
     padding-left: 115px;
-}
+}*/
 
 .project {
     margin-bottom: 25px;
