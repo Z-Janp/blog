@@ -260,7 +260,7 @@ li.skill_3 .skill_part:before {
 .learn_list_point {
     position: relative;
     padding-left: 15px;
-    margin: 15px 0;
+    margin: 10px 0;
     height: 26px;
     line-height: 26px;
 }
@@ -277,7 +277,7 @@ li.skill_3 .skill_part:before {
 }
 
 .learn_list_unit {
-    margin: 15px 0 15px 20px;
+    margin: 10px 0 10px 20px;
 }
 
 /*.learn_list_unit_header {
