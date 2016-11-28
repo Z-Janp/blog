@@ -124,5 +124,13 @@ body
             p.QRCode_text
                 a(href="/resume") 扫描二维码查阅简历
     script(src="/js/resume.js")
+    script.
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?2334e921077280e40e2b0931857c56a0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
     <!--<![endif]-->
 </html>
