@@ -3,6 +3,7 @@ const _ = require('underscore');
 const marked = require('marked');
 const Article = require('../models/article.js');
 const Category = require('../models/category.js');
+// const Highlight = require("highlight").Highlight;
 exports.detail = (req, res, next) => {
     const id = req.params.id;
     if (id.match(/^[0-9a-fA-F]{24}$/)) {

@@ -1,7 +1,7 @@
 {
-  "name": "nodeblog",
+  "name": "blog-server",
   "version": "0.0.1",
-  "description": "A single-user bolg project based on Node.js",
+  "description": "A single-user bolg server based on Node.js",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -12,7 +12,9 @@
     "underscore": "^1.8.3",
     "moment": "^2.14.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "highlight.js": "^9.10.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -71,6 +71,13 @@ var janp = (function () {
     function updateProgress(perc) {
         $prog2.style.cssText = 'width:' + perc * 100 + '%';
     }
+    var code = document.querySelectorAll('.art-content pre code');
+    code = Array.prototype.slice.call(code);
+    code.map(function (itm) {
+        var worker = new Worker('/js/render-code.js');
+        worker.postMessage(itm.textContent);
+        worker.onmessage = function(event) { itm.innerHTML = event.data; }
+    });
 
 })();
 //多说评论
