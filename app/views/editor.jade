@@ -26,11 +26,29 @@ block content
                     input#inputCategory.form-control(type="text", name="article[categoryName]", placeholder="如需新增分类在此输入")
             .form-group
                 .col-sm-12
-                    textarea#deitor.editor(spellcheck="false",name="article[content]")=article?article.content:''
+                    textarea#editor.editor(spellcheck="false",name="article[content]")=article?article.content:''
             .pull-right
                 button#pubBtn.btn.btn-success(type="button") 提交
+            .f-upload-pic-modal.modal.fade.modal_wrapper(aria-hidden='true')
+                .modal-dialog(style='width:600px;')
+                    .modal-content
+                        .modal-header
+                            h3.modal-title 插入图片
+                        #j-upload-container.modal-body
+                            p 请填写图片URL：
+                            .input-group
+                                span.input-group-addon
+                                    i.fa.fa-image  
+                                input.col-lg-5.form-control(placeholder='http://example.com/image.jpg')
+                            .modal-footer
+                                a#j-open-pic.btn.btn-default.has-feedback.pull-left
+                                    input(type='file',id='uploader',name='files[]',accept='image/jpg,image/jpeg,image/png',multiple='multiple',onchange='',style='position:absolute; top:0; right:0; opacity:0; filter: alpha(opacity=0); font-size:23px; direction: ltr; cursor: pointer;')
+                                    i.glyphicon.glyphicon-folder-open
+                                    span(style='margin-left:5px;') 插入本地图片...
+                                button#dismissBtn.btn.btn-default(type="button",data-dismiss="modal") 关闭
+                                button#j-upload-pic.btn.btn-primary(type="button") 上传
+    script(src="https://cdn.staticfile.org/plupload/2.1.9/plupload.full.min.js")
+    script(src="https://cdn.staticfile.org/qiniu-js-sdk/1.0.14-beta/qiniu.min.js")
     script(src="/js/mditor.min.js")
     script(src='/js/editValidator.js')
-        
-        
-        
+    script(src='/js/upload.js')

@@ -24,6 +24,7 @@ module.exports = (app) => {
     app.get('/editor/:id', Article.update);
     app.get('/admin/article/list', User.loginRequire, Article.list);
     app.post('/admin/publish', User.loginRequire, Article.save);
+    app.get('/admin/createUptoken', Article.createUptoken);
 
     app.get('/about', Index.showAbout);
     app.get('/resume', Index.showResume);

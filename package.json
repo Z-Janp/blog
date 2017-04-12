@@ -13,7 +13,9 @@
     "moment": "^2.14.1"
   },
   "devDependencies": {
-    "highlight.js": "^9.10.0"
+    "highlight.js": "^9.10.0",
+    "mditor": "^1.2.6",
+    "qiniu": "^6.1.13"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

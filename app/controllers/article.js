@@ -3,6 +3,25 @@ const _ = require('underscore');
 const marked = require('marked');
 const Article = require('../models/article.js');
 const Category = require('../models/category.js');
+const qiniu = require("qiniu");
+//要上传的空间
+const bucket = 'blog';
+qiniu.conf.ACCESS_KEY = 'c8dLdvStOycZ0BEL_omkCHOBnJdXCu9Eryb8L1oP';
+qiniu.conf.SECRET_KEY = 'RuawY7nKRhyLZFg3WUAA1N4P-TxyJRUtWmk8k4Q5';
+//要上传的空间
+var uptoken = new qiniu.rs.PutPolicy(bucket);
+
+exports.createUptoken = (req, res, next) => {
+    var token = uptoken.token();
+    res.header("Cache-Control", "max-age=0, private, must-revalidate");
+    res.header("Pragma", "no-cache");
+    res.header("Expires", 0);
+    if (token) {
+        res.json({
+            uptoken: token
+        });
+    }
+};
 // const Highlight = require("highlight").Highlight;
 exports.detail = (req, res, next) => {
     const id = req.params.id;
