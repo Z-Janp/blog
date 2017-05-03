@@ -16,9 +16,10 @@ block content
                         th 标题
                         th 作者
                         th 更新时间
+                        th 状态
                         th 查看
                         th 更新
-                        th 删除
+                        th 状态设置
                 tbody
                     each item in articles
                         tr(class="item-id-#{item._id}")
@@ -26,9 +27,10 @@ block content
                             td #{item.title}
                             td #{item.author}
                             td #{moment(item.meta.updateAt).format('YYYY/MM/DD')}
+                            th.j-status #{item.status===1?"有效":"无效"}
                             td: a(target="_blank",href="../../article/#{item._id}") 查看
                             td: a(target="_blank",href="../../editor/#{item._id}") 修改
                             td
-                                button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+                                button.btn.btn-success.j-del(type="button",data-id="#{item._id}",data-status="#{item.status}",class={"btn-danger": item.status === 1}) #{item.status===1?"置为无效":"置为有效"}
     script(src='/js/list.js')
     script(src='/js/login.js')

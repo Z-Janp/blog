@@ -39,8 +39,13 @@ var uploader = Qiniu.uploader({
                 //  }
                 // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
                 // console.log(up);
-                var picName = JSON.parse(info).key;
-                mditor.editor.wrapSelectText('![' + picName + '](' + domain_qiniu + picName + ')');
+                var fileName = JSON.parse(info).key;
+                console.log(file.type.indexOf('image') > 0);
+                if (file.type.indexOf('image') > 0) {
+                    mditor.editor.wrapSelectText('![' + fileName + '](' + domain_qiniu + fileName + ')');
+                } else {
+                    mditor.editor.wrapSelectText('[' + fileName + '](' + domain_qiniu + fileName + ')');
+                }
                 $(".f-upload-pic-modal").modal('hide');
                 // var domain = up.getOption('domain');
                 // var res = parseJSON(info);
@@ -68,7 +73,13 @@ var uploader = Qiniu.uploader({
 });
 
 $('#j-upload-pic').on('click', function(){
-    uploader.start();
+    let fileUrl = $('.j-file-ipt').val();
+    if (fileUrl) {
+        mditor.editor.wrapSelectText('![', '](' + fileUrl + ')');
+        $(".f-upload-pic-modal").modal('hide');
+    } else {
+        uploader.start();
+    }
 });
 // domain 为七牛空间（bucket)对应的域名，选择某个空间后，可通过"空间设置->基本设置->域名设置"查看获取
 

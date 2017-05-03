@@ -6,6 +6,7 @@ const ArticleSchema = new Schema({
     author: String,
     title: String,
     content: String,
+    status: Number,
     category: { type: ObjectId, ref: "Category" },
     meta: {
         createAt: {

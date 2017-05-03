@@ -194,7 +194,7 @@ code{
 	padding-top: 0.5rem;
 	padding-bottom:0.5rem;
 }
-#rightSide a:link, #rightSide a:visited,.contact_item a,.about-me a {
+#rightSide a:link, #rightSide a:visited, .u-sidebar a {
     color: #111;
 }
 #rightSide table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}

@@ -16,7 +16,7 @@ html
             s.parentNode.insertBefore(hm, s);
             })();
     body
-        aside#sidebar
+        aside#sidebar.u-sidebar
             img.myPic(src="/img/8100.jpg" alt="My Picture")
             address
                 ul.contact
@@ -29,8 +29,10 @@ html
                     li.contact_item
                         a(href="https://github.com/Z-Janp",target="_blank")
                             i.fa.fa-github.fa-fw
-            span.about-me 
+            span.about-me
                 a(href="/about") About me
+            span
+                a(href="/editor",style="margin-left:10px;") 新建
             form.searchBox
                 input.searchTxt(type="search",name="search",autocomplete="off")
                 input.searchBtn(type="button")

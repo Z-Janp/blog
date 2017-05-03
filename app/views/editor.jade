@@ -39,12 +39,12 @@ block content
                             .input-group
                                 span.input-group-addon
                                     i.fa.fa-image  
-                                input.col-lg-5.form-control(placeholder='http://example.com/image.jpg')
+                                input.col-lg-5.form-control.j-file-ipt(placeholder='http://example.com/image.jpg')
                             .modal-footer
                                 a#j-open-pic.btn.btn-default.has-feedback.pull-left
                                     input(type='file',id='uploader',name='files[]',accept='image/jpg,image/jpeg,image/png',multiple='multiple',onchange='',style='position:absolute; top:0; right:0; opacity:0; filter: alpha(opacity=0); font-size:23px; direction: ltr; cursor: pointer;')
                                     i.glyphicon.glyphicon-folder-open
-                                    span(style='margin-left:5px;') 插入本地图片...
+                                    span(style='margin-left:5px;') 插入本地文件
                                 button#dismissBtn.btn.btn-default(type="button",data-dismiss="modal") 关闭
                                 button#j-upload-pic.btn.btn-primary(type="button") 上传
     script(src="https://cdn.staticfile.org/plupload/2.1.9/plupload.full.min.js")

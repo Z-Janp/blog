@@ -20,7 +20,7 @@ module.exports = (app) => {
     app.get('/article/:id', Article.detail);
     app.post('/result', Article.search);
     app.get('/editor', Article.edit);
-    app.delete('/article/del', User.loginRequire, Article.deleteArticle);
+    app.post('/article/toggleStatus', User.loginRequire, Article.toggleStatus);
     app.get('/editor/:id', Article.update);
     app.get('/admin/article/list', User.loginRequire, Article.list);
     app.post('/admin/publish', User.loginRequire, Article.save);

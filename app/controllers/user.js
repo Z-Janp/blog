@@ -8,14 +8,14 @@ exports.login = (req, res) => {
             console.log(err);
         }
         if (!user) {
-            return res.json({ error: -1, data: '用户名或密码错误！' });
+            return res.json({ error: -1, data: '用户名与密码不匹配!' });
         }
         const isMatch = user.comparePassword(password);
         if (isMatch) {
             req.session.user = user;
             return res.json({ success: 1, data: '登录成功！', user: user.name });
         } else {
-            return res.json({ error: -1, data: '用户名或密码错误！' });
+            return res.json({ error: -1, data: '用户名与密码不匹配!' });
         }
     })
 };

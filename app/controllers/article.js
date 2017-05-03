@@ -85,20 +85,20 @@ exports.search = (req, res) => {
             res.json({ success: true, articles: articles });
         })
 }
-exports.xhrdetail = (req, res, next) => {
-    const id = req.params.id;
-    if (id.match(/^[0-9a-fA-F]{24}$/)) {
-        Article.findById(id, (err, article) => {
-            if (err) {
-                console.log(err);
-            }//处理null
-            article.content = marked(article.content);
-            res.json({ success: true, article: article });
-        })
-    } else {
-        next();
-    }
-};
+// exports.xhrdetail = (req, res, next) => {
+//     const id = req.params.id;
+//     if (id.match(/^[0-9a-fA-F]{24}$/)) {
+//         Article.findById(id, (err, article) => {
+//             if (err) {
+//                 console.log(err);
+//             }//处理null
+//             article.content = marked(article.content);
+//             res.json({ success: true, article: article });
+//         })
+//     } else {
+//         next();
+//     }
+// };
 exports.edit = (req, res) => {
     Category
         .find({})
@@ -112,15 +112,26 @@ exports.edit = (req, res) => {
             })
         })
 };
-exports.deleteArticle = (req, res) => {
-    const id = req.query.id;
+exports.toggleStatus = (req, res) => {
+    const body = req.body;
+    const status = body.status;
+    const id = body.id;
+    const tmpSts = status === '1' ? 0 : 1;
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
-        Article.remove({ _id: id }, (err, article) => {
+        // Article.remove({ _id: id }, (err, article) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         res.json({ success: 1 });
+        //     }
+        // })
+        Article.findByIdAndUpdate(id, { $set: { status: tmpSts }}, (err, article) => {
             if (err) {
                 console.log(err);
-            } else {
-                res.json({ success: 1 });
+                return;
             }
+            //res.redirect('/article/' + id);
+            res.json({ success: 1 });
         })
     }
 };
@@ -147,9 +158,10 @@ exports.update = (req, res) => {
     }
 };
 exports.list = (req, res) => {
+    // 链式查询
     Article
         .find({ author: req.session.user.name }, { 'content': 0 })
-        .populate({ path: 'category', select: 'name', })
+        .populate({ path: 'category', select: 'name'})
         .sort({ 'meta.createAt': -1 })
         .exec((err, articles) => {
             if (err) {
@@ -162,8 +174,9 @@ exports.list = (req, res) => {
         })
 };
 exports.save = (req, res) => {
-    const articleObj = req.body.article;
-    const id = req.body.article._id;
+    const body = req.body;
+    const articleObj = body.article;
+    const id = body.article._id;
     let _article;
     if (id && id.match(/^[0-9a-fA-F]{24}$/)) {
         Article.findById(id, (err, article) => {
@@ -183,6 +196,7 @@ exports.save = (req, res) => {
         })
     } else {
         _article = new Article(articleObj);
+        _article.status = 1;
         _article.author = req.session.user.name;
         const categoryId = articleObj.category;
         const categoryName = articleObj.categoryName;
@@ -232,3 +246,4 @@ exports.save = (req, res) => {
         })
     };
 }
+
