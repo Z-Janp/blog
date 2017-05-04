@@ -20,43 +20,60 @@ var uploader = Qiniu.uploader({
     auto_start: false,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
     init: {
         'FilesAdded': function(up, files) {
+            // plupload.each(files, function(file) {
+            //     // 文件添加进队列后,处理相关的事情
+            // });
+            // $('table').show();
+            // $('#success').hide();
             plupload.each(files, function(file) {
-                // 文件添加进队列后,处理相关的事情
+                // var progress = new FileProgress(file, 'fsUploadProgress');
+                // progress.setStatus("等待...");
+                // progress.bindUploadCancel(up);
             });
         },
         'BeforeUpload': function(up, file) {
-                // 每个文件上传前,处理相关的事情
+            // 每个文件上传前,处理相关的事情
+            $(".f-upload-pic-modal").modal('hide');
+            $(".f-upload-process-modal").modal()
+            var progress = new FileProgress(file, 'fsUploadProgress');
+            var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+            if (up.runtime === 'html5' && chunk_size) {
+                progress.setChunkProgess(chunk_size);
+            }
         },
         'UploadProgress': function(up, file) {
-                // 每个文件上传时,处理相关的事情
+            // 每个文件上传时,处理相关的事情
+            var progress = new FileProgress(file, 'fsUploadProgress');
+            var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+            progress.setProgress(file.percent + "%", file.speed, chunk_size);
         },
         'FileUploaded': function(up, file, info) {
-                // 每个文件上传成功后,处理相关的事情
-                // 其中 info 是文件上传成功后，服务端返回的json，形式如
-                // {
-                //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
-                //    "key": "gogopher.jpg"
-                //  }
-                // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
-                // console.log(up);
-                var fileName = JSON.parse(info).key;
-                console.log(file.type.indexOf('image') > 0);
-                if (file.type.indexOf('image') > 0) {
-                    mditor.editor.wrapSelectText('![' + fileName + '](' + domain_qiniu + fileName + ')');
-                } else {
-                    mditor.editor.wrapSelectText('[' + fileName + '](' + domain_qiniu + fileName + ')');
-                }
-                $(".f-upload-pic-modal").modal('hide');
-                // var domain = up.getOption('domain');
-                // var res = parseJSON(info);
-                // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+            // 每个文件上传成功后,处理相关的事情
+            // 其中 info 是文件上传成功后，服务端返回的json，形式如
+            // {
+            //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+            //    "key": "gogopher.jpg"
+            //  }
+            // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+            // console.log(up);
+            var fileName = JSON.parse(info).key;
+            if (file.type.indexOf('image') > -1) {
+                mditor.editor.wrapSelectText('![' + fileName + '](' + domain_qiniu + fileName + ')' + mditor.EOL);
+            } else {
+                mditor.editor.wrapSelectText('[' + fileName + '](' + domain_qiniu + fileName + ')' + mditor.EOL);
+            }
+            $(".f-upload-process-modal").modal('hide');
+            $('#fsUploadProgress').html('');
+            // var domain = up.getOption('domain');
+            // var res = parseJSON(info);
+            // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
         },
         'Error': function(up, err, errTip) {
-                //上传出错时,处理相关的事情
-                console.log(up);
-                console.log(err);
-                console.log(errTip);
-                alter('上传出错');
+            //上传出错时,处理相关的事情
+            console.log(up);
+            console.log(err);
+            console.log(errTip);
+            alter('上传出错');
         },
         'UploadComplete': function() {
                 //队列文件处理完毕后,处理相关的事情

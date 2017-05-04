@@ -3,6 +3,29 @@ block bootstrapValidator
     link(href="/css/mditor.min.css",rel="stylesheet")
     style.
         .publish{margin-top:60px;}
+        .u-tab th{border-bottom: 2px solid #ddd;padding: 8px;}
+        .u-tab td{vertical-align: top;padding: 8px;}
+        .info {
+            position: relative;
+            height: 100%;
+        }
+        .progressCancel {
+            display: inline-block;
+            float: right;
+            position: relative;
+            z-index: 100;
+            color: #333;
+            text-decoration: none;
+        }
+        .status {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 24px;
+        }
+        .f-upload-process-modal .modal-content{
+            padding: 20px;
+        }
     link(href="/css/bootstrapValidator.min.css",rel="stylesheet")
     script(src="/js/bootstrapValidator.min.js")
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -47,8 +70,19 @@ block content
                                     span(style='margin-left:5px;') 插入本地文件
                                 button#dismissBtn.btn.btn-default(type="button",data-dismiss="modal") 关闭
                                 button#j-upload-pic.btn.btn-primary(type="button") 上传
+            .f-upload-process-modal.modal.fade.modal_wrapper(aria-hidden='true')
+                .modal-dialog(style='width:600px;')
+                    .modal-content
+                        table.u-tab
+                            thead
+                                tr
+                                    th.col-md-4 文件名
+                                    th.col-md-2 大小
+                                    th.col-md-6 详情
+                            tbody#fsUploadProgress
     script(src="https://cdn.staticfile.org/plupload/2.1.9/plupload.full.min.js")
     script(src="https://cdn.staticfile.org/qiniu-js-sdk/1.0.14-beta/qiniu.min.js")
     script(src="/js/mditor.min.js")
     script(src='/js/editValidator.js')
+    script(src='/js/file-progress.js')
     script(src='/js/upload.js')
