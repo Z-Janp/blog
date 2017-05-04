@@ -26,9 +26,9 @@ var uploader = Qiniu.uploader({
             // $('table').show();
             // $('#success').hide();
             plupload.each(files, function(file) {
-                // var progress = new FileProgress(file, 'fsUploadProgress');
+                var progress = new FileProgress(file, 'fsUploadProgress');
                 // progress.setStatus("等待...");
-                // progress.bindUploadCancel(up);
+                progress.bindUploadCancel(up);
             });
         },
         'BeforeUpload': function(up, file) {
