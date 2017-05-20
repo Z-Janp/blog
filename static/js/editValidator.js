@@ -4,7 +4,7 @@ mditor.on('ready',function(){
 	var btn = mditor.toolbar.getItem('image');
 	//替换按钮动作
 	btn.handler = function(){
-		$(".f-upload-pic-modal").modal()
+		$(".f-upload-pic-modal").modal();
 	};
 });
 
