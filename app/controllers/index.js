@@ -73,6 +73,7 @@ exports.sentMusic = (req, res) => {
                 } else {
                     artname = resbody.songs[0].artists[0].name;
                 }
+                console.log(resbody.songs[0]);
                 const song = {
                     songUrl: resbody.songs[0].mp3Url,
                     imgUrl: resbody.songs[0].album.blurPicUrl,
